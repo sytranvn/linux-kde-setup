@@ -1,5 +1,10 @@
 # Linux Kernel Development Environment setup
 
+## Virtual machine
+
+Create a virtual machine for safety. Create at least 50G virtual disk to store code. Because source code and build artifacts
+can take 25-30GB.
+
 ## Environment
 
 On development and test systems, it is a good idea to ensure there is ample space for kernels in the boot partition.
@@ -76,4 +81,35 @@ Start by cloning Linus's tree which is called [Linux mainline](https://git.kerne
     git checkout next
 
 ## Building and Installing First Kernel
+
+### Clone the Stable kernel git
+    
+    git clone git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable.git -n
+    cd linux-stable
+    git branch -a | grep linux-6
+    git checkout linux-5.19.y
+
+Copy old kernel config file from `/boot/config-5.*` to source directory
+    
+    cp /boot/cofig-5.15.0-89-generic .config
+
+Make sure to comment out 
+
+    CONFIG_SYSTEM_TRUSTED_KEYS="debian/canoical-certs.pem"
+    CONFIG_SYSTEM_REVOCATION_KEYS="debian/canonical-revoked-certs.pem"
+
+config since it is debian specific config.
+
+    make oldconfig
+
+
+Hold enter to select all new default flags.
+
+Start building.
+
+    make -j4 all
+
+    make modules_install install
+
+
 
