@@ -1,5 +1,7 @@
 # Linux Kernel Development Environment setup
 
+Summary and notes from [A Beginner's Guide to Linux Kernel Development (LFD103)](https://trainingportal.linuxfoundation.org/courses/a-beginners-guide-to-linux-kernel-development-lfd103) course.
+
 ## Virtual machine
 
 Create a virtual machine for safety. Create at least 50G virtual disk to store code. Because source code and build artifacts
